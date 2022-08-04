@@ -1,0 +1,205 @@
+@import url('https://unpkg.com/open-props');
+@import url('./brand.css');
+:root {
+	--font-size-fluid-0: clamp(0.87rem, 1.9vw, 0.95rem);
+
+	/* light */
+	--text1-light: var(--black);
+	--text2-light: var(--gray-9);
+	--surface0-light: var(--white);
+	--surface1-light: var(--gray-0);
+	--surface2-light: var(--gray-1);
+	--surface3-light: var(--gray-2);
+	--surface4-light: var(--gray-3);
+	--yellow1-light: var(--yellow-0);
+	--yellow2-light: var(--yellow-1);
+	--yellow3-light: var(--yellow-2);
+	--yellow4-light: var(--yellow-3);
+	--green1-light: var(--green-0);
+	--green2-light: var(--green-1);
+	--green3-light: var(--green-2);
+	--green4-light: var(--green-3);
+	--surface-shadow-light: 200 10% 20%;
+	--shadow-strength-light: 2%;
+
+	/* dark */
+	--text1-dark: var(--white);
+	--text2-dark: var(--gray-1);
+	--surface0-dark: var(--black);
+	--surface1-dark: var(--gray-9);
+	--surface2-dark: var(--gray-8);
+	--surface3-dark: var(--gray-7);
+	--surface4-dark: var(--gray-6);
+	--yellow1-dark: var(--yellow-9);
+	--yellow2-dark: var(--yellow-8);
+	--yellow3-dark: var(--yellow-7);
+	--yellow4-dark: var(--yellow-6);
+	--green1-dark: var(--green-9);
+	--green2-dark: var(--green-8);
+	--green3-dark: var(--green-7);
+	--green4-dark: var(--green-6);
+	--surface-shadow-dark: 200 50% 3%;
+	--shadow-strength-dark: 80%;
+
+	color-scheme: light;
+	/* set defaults */
+	--text1: var(--text1-light);
+	--text2: var(--text2-light);
+	--surface0: var(--surface0-light);
+	--surface1: var(--surface1-light);
+	--surface2: var(--surface2-light);
+	--surface3: var(--surface3-light);
+	--surface4: var(--surface4-light);
+	--yellow1: var(--yellow1-light);
+	--yellow2: var(--yellow2-light);
+	--yellow3: var(--yellow3-light);
+	--yellow4: var(--yellow4-light);
+	--green1: var(--green1-light);
+	--green2: var(--green2-light);
+	--green3: var(--green3-light);
+	--green4: var(--green4-light);
+	--surface-shadow: var(--surface-shadow-light);
+	--shadow-strength: var(--shadow-strength-light);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+
+		--text1: var(--text1-dark);
+		--text2: var(--text2-dark);
+		--surface0: var(--surface0-dark);
+		--surface1: var(--surface1-dark);
+		--surface2: var(--surface2-dark);
+		--surface3: var(--surface3-dark);
+		--surface4: var(--surface4-dark);
+		--yellow1: var(--yellow1-dark);
+		--yellow2: var(--yellow2-dark);
+		--yellow3: var(--yellow3-dark);
+		--yellow4: var(--yellow4-dark);
+		--green1: var(--green1-dark);
+		--green2: var(--green2-dark);
+		--green3: var(--green3-dark);
+		--green4: var(--green4-dark);
+		--surface-shadow: var(--surface-shadow-dark);
+		--shadow-strength: var(--shadow-strength-dark);
+	}
+}
+
+[color-scheme='light'] {
+	color-scheme: light;
+
+	--text1: var(--text1-light);
+	--text2: var(--text2-light);
+	--surface0: var(--surface0-light);
+	--surface1: var(--surface1-light);
+	--surface2: var(--surface2-light);
+	--surface3: var(--surface3-light);
+	--surface4: var(--surface4-light);
+	--yellow1: var(--yellow1-light);
+	--yellow2: var(--yellow2-light);
+	--yellow3: var(--yellow3-light);
+	--yellow4: var(--yellow4-light);
+	--green1: var(--green1-light);
+	--green2: var(--green2-light);
+	--green3: var(--green3-light);
+	--green4: var(--green4-light);
+	--surface-shadow: var(--surface-shadow-light);
+	--shadow-strength: var(--shadow-strength-light);
+}
+
+[color-scheme='dark'] {
+	color-scheme: dark;
+
+	--text1: var(--text1-dark);
+	--text2: var(--text2-dark);
+	--surface0: var(--surface0-dark);
+	--surface1: var(--surface1-dark);
+	--surface2: var(--surface2-dark);
+	--surface3: var(--surface3-dark);
+	--surface4: var(--surface4-dark);
+	--yellow1: var(--yellow1-dark);
+	--yellow2: var(--yellow2-dark);
+	--yellow3: var(--yellow3-dark);
+	--yellow4: var(--yellow4-dark);
+	--green1: var(--green1-dark);
+	--green2: var(--green2-dark);
+	--green3: var(--green3-dark);
+	--green4: var(--green4-dark);
+	--surface-shadow: var(--surface-shadow-dark);
+	--shadow-strength: var(--shadow-strength-dark);
+}
+
+html,
+body {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	/* overflow: hidden; */
+	max-width: 100vw;
+	max-height: 100vh;
+}
+
+body {
+	color: var(--text1);
+	background-color: var(--surface0);
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+		'Helvetica Neue', sans-serif;
+	font-size: var(--font-size-fluid-0);
+}
+
+a {
+	color: var(--brand1);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: var(--brand2);
+}
+
+label {
+	display: block;
+}
+
+input,
+button,
+select,
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	-webkit-padding: 0.4em 0;
+	padding: 0.4em;
+	margin: 0 0 0.5em 0;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+input:disabled {
+	color: #ccc;
+}
+
+button {
+	color: #333;
+	background-color: #f4f4f4;
+	outline: none;
+}
+
+button:disabled {
+	color: #999;
+}
+
+button:not(:disabled):active {
+	background-color: #ddd;
+}
+
+button:focus {
+	border-color: #666;
+}

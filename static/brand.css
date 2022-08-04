@@ -1,0 +1,32 @@
+:root {
+	/* light */
+	--brand1-light: var(--red-8);
+	--brand2-light: var(--red-6);
+	--brand3-light: var(--red-4);
+	--brand4-light: var(--red-2);
+	--brand5-light: var(--red-0);
+	--brand6-light: var(--gray-9);
+	--brand1-grad-light: linear-gradient(to right bottom, var(--gray-0), var(--red-2));
+	--error-light: var(--red-4);
+
+	/* dark */
+	--brand1-dark: var(--red-1);
+	--brand2-dark: var(--red-3);
+	--brand3-dark: var(--red-5);
+	--brand4-dark: var(--red-7);
+	--brand5-dark: var(--red-9);
+	--brand6-light: var(--gray-0);
+	--brand1-grad-dark: linear-gradient(to right bottom, var(--red-8), var(--gray-9));
+	--error-dark: var(--red-5);
+
+	color-scheme: light;
+	/* set defaults */
+	--brand1: var(--brand1-light);
+	--brand2: var(--brand2-light);
+	--brand3: var(--brand3-light);
+	--brand4: var(--brand4-light);
+	--brand5: var(--brand5-light);
+	--brand6: var(--brand6-light);
+	--brand1-grad: var(--brand1-grad-light);
+	--error: var(--error-light);
+}
