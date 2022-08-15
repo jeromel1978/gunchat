@@ -1,7 +1,6 @@
 <script lang="ts">
 	import GUN from 'gun/gun.js';
 	import SEA from 'gun/sea.js';
-	import VirtualList from '@sveltejs/svelte-virtual-list';
 	import { gun, user, SendMessage, messages, key, match } from '$lib/gun';
 	import type { Message } from '$lib/gun';
 	import MessageTemplate from '$lib/message.svelte';
@@ -10,7 +9,6 @@
 
 	let Inbound: HTMLDivElement;
 	let SendButton: HTMLButtonElement;
-	let Scrolled = true;
 	let NewMessageText = 'New Message';
 	let NewMessageIndicator = NewMessageText;
 	let Message = '';
@@ -18,9 +16,6 @@
 	let items: Message[] = [];
 
 	onMount(async () => {
-		// console.log(alias);
-		// console.log($gun);
-		// console.log($user);
 		if (!$user.is) goto('/login');
 		GetInitialMessages();
 	});
@@ -34,7 +29,6 @@
 	const Send = async () => {
 		SendMessage(Message);
 		Message = '';
-		// SendButton.focus();
 	};
 
 	const GetMessage = async (data: any, id: any) => {
@@ -51,49 +45,47 @@
 			items = [...items.slice(-100), message].sort((a, b) => a.when - b.when);
 		}
 		if (!Inbound) return;
-		if (!Scrolled) {
-			setTimeout(ScrollToBottom, 100);
+		console.debug(Inbound?.scrollTop, maxScroll, AutoScroll);
+		if (AutoScroll) {
+			setTimeout(ScrollToBottom, 500);
 		} else {
 			NewMessageIndicator = NewMessageText;
 		}
 	};
 
 	export const GetInitialMessages = () => {
-		// console.log(g.get('chat').map(match));
 		$gun.get('chat').map(match).once(GetMessage);
-		// ScrollToBottom();
-		// setInterval(ScrollToBottom, ScrollCheckInterval);
 	};
 
 	const CheckInput = (e: KeyboardEvent) => {
 		if (e.key === 'Enter' && Message) Send();
 	};
 	const ScrollToBottom = () => {
-		// if (Scrolled) return;
-		console.log('Scrolling to Bottom');
-		Inbound.scrollTop = Inbound?.scrollHeight ?? Inbound?.scrollTop ?? 0;
+		// console.log('Scrolling to Bottom');
+		// if (!AutoScroll) return;
+		// Inbound.scrollTop = Inbound?.scrollHeight ?? Inbound?.scrollTop ?? 0;
+		Inbound.scrollTop = Inbound?.scrollHeight;
 		NewMessageIndicator = '';
-		Scrolled = false;
-		// Scrolled = true;
+		AutoScroll = true;
 	};
 	let maxScroll = 0;
-	const ManualScroll = () => {
-		// clearInterval(timer);
-		// timer = setInterval(ScrollToBottom, ScrollCheckInterval);
-		if (Inbound?.scrollTop > maxScroll) {
-			maxScroll = Inbound?.scrollTop;
-			Scrolled = false;
+	const ScrollHandler = () => {
+		if (Inbound?.scrollTop === maxScroll) {
+			AutoScroll = true;
+			maxScroll = 0;
 		} else {
-			Scrolled = true;
+			maxScroll = Inbound?.scrollTop > maxScroll ? Inbound?.scrollTop : maxScroll;
+			AutoScroll = Inbound?.scrollTop >= maxScroll;
 		}
-		// console.log(maxScroll, Inbound?.scrollTop);
 	};
-	$: Hidden = NewMessageIndicator ? '' : 'hidden';
+	// $: AutoScroll = Inbound?.scrollTop >= maxScroll;
+	let AutoScroll: boolean = true;
+	$: Hidden = NewMessageIndicator || !AutoScroll ? '' : 'hidden';
 </script>
 
 {#if $user.is}
-	<div class="container">
-		<div class="inbound" bind:this={Inbound} on:scroll={ManualScroll}>
+	<div class="chatcontainer">
+		<div class="inbound" bind:this={Inbound} on:scroll={ScrollHandler}>
 			{#each items as item}
 				<MessageTemplate {...item} />
 			{/each}
@@ -107,8 +99,16 @@
 				<span class="material-icons"> keyboard_double_arrow_down </span>
 			</div>
 		</div>
+		<!-- <form method="post"> -->
 		<div class="messagebar">
-			<input type="text" class="message" bind:value={Message} on:keypress={CheckInput} />
+			<input
+				id="message"
+				name="message"
+				type="text"
+				class="message"
+				bind:value={Message}
+				on:keypress={CheckInput}
+			/>
 			<button on:click={Send} bind:this={SendButton} title="Send"
 				><span class="material-icons"> send </span></button
 			>
@@ -118,11 +118,8 @@
 
 <style>
 	.newbar {
-		user-select: none;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		cursor: pointer;
+		@apply flex flex-row select-none justify-between cursor-pointer;
+		/* grid-template-columns: 1fr auto; */
 		background: linear-gradient(
 			180deg,
 			rgba(128, 128, 128, 0) 0%,
@@ -132,39 +129,17 @@
 		);
 	}
 	.hidden {
-		height: 0;
+		@apply h-0;
 	}
-	.container {
-		/* display: flex; */
-		height: 100%;
-		/* width: 100%; */
-		display: grid;
+	.chatcontainer {
+		@apply grid box-border overflow-hidden;
 		grid-template-rows: 1fr auto auto;
-		/* height: minmax(1rem, 50%) !important; */
-		/* width: 100%; */
-		/* max-height: 100% !important;
-		overflow: hidden; */
-		box-sizing: border-box;
 	}
 	.messagebar {
-		display: grid;
+		@apply grid box-border;
 		grid-template-columns: 1fr auto;
-		/* width: 100%; */
-		box-sizing: border-box;
 	}
 	.inbound {
-		display: flex;
-		flex-direction: column;
-		/* width: 100%;
-		height: 100%; */
-		gap: var(--size-fluid-1);
-		margin-left: var(--size-fluid-1);
-		margin-right: var(--size-fluid-1);
-		/* width: 100%; */
-		/* max-height: 100%; */
-		overflow-y: auto;
-		/* max-width: 100%; */
-		/* box-sizing: border-box; */
-		scroll-behavior: smooth;
+		@apply flex flex-col gap-2 mx-2 overflow-y-auto scroll-smooth;
 	}
 </style>

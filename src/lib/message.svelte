@@ -23,9 +23,6 @@
 	};
 	const NameClicked = () => {
 		let u = $gun.get(`~@${who}`).once((data, key) => {
-			// console.log($user);
-			// console.log(data, key);
-			// data.get(key).put('Test');
 			let pub = Object.keys(data)[1];
 			pub = pub.substring(1, pub.length);
 			const user: any = $gun.user(pub);
@@ -52,64 +49,50 @@
 <style>
 	.whoicon,
 	.who {
-		cursor: pointer;
-		user-select: none;
+		@apply cursor-pointer select-none;
 	}
 	.details {
-		display: flex;
-		flex-direction: column;
+		@apply flex flex-col;
 	}
 	.outbound .details {
-		align-items: flex-end;
+		@apply items-end;
 	}
 	.message {
-		display: flex;
-		gap: 0.5rem;
+		@apply flex gap-2;
 	}
 	.whoicon {
-		display: flex;
-		align-items: end;
+		@apply flex items-end;
 	}
 	.whoicon > img {
-		height: var(--size-fluid-4);
-		width: var(--size-fluid-4);
-		aspect-ratio: 1;
-		border-radius: 50%;
+		@apply h-14 w-14 aspect-square rounded-full;
 	}
 	.inbound {
-		flex-direction: row;
+		@apply flex-row;
 	}
 	.outbound {
-		flex-direction: row-reverse;
+		@apply flex-row-reverse;
 	}
 	.who {
-		font-size: var(--font-size-fluid-0);
-		color: var(--brand1);
-		gap: var(--size-1);
+		@apply text-xs text-red-500 gap-1;
 	}
 	.what {
-		padding: 0.5rem;
-		background-color: hsla(0, 0%, 50%, 0.5);
-		width: fit-content;
-		color: var(--text1);
+		@apply px-3 py-1 bg-slate-300 w-fit text-black;
 	}
 	.inbound .who,
 	.inbound .what {
-		display: flex;
-		justify-content: left;
+		@apply flex justify-start;
 	}
 	.inbound .what {
-		border-radius: 0 0.5rem 0.5rem 0.5rem;
+		@apply rounded-r-full rounded-b-full;
 	}
 	.outbound {
-		flex-direction: row-reverse;
+		@apply flex-row-reverse;
 	}
 	.outbound .who,
 	.outbound .what {
-		display: flex;
-		justify-content: right;
+		@apply flex justify-end;
 	}
 	.outbound .what {
-		border-radius: 0.5rem 0 0.5rem 0.5rem;
+		@apply rounded-l-full rounded-b-full;
 	}
 </style>

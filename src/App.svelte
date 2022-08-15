@@ -1,11 +1,12 @@
 <script lang="ts">
+	// import './styles/tailwind-output.css';
 	export let name: string;
 	// import 'open-props';
 	// import { page } from '$app/stores'
 	// const email = $page.url.searchParams('email')
 </script>
 
-<main>
+<main class="w-full h-full bg-white dark:bg-black">
 	<h1>Hello {name}!</h1>
 	<p>
 		Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte
@@ -13,7 +14,7 @@
 	</p>
 </main>
 
-<style>
+<!-- <style>
 	main {
 		text-align: center;
 		padding: 1em;
@@ -33,4 +34,9 @@
 			max-width: none;
 		}
 	}
-</style>
+</style> -->
+<!-- <style>
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+</style> -->

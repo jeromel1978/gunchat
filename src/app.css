@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html {
+	@apply flow-root m-0 p-0 h-full;
+}
+body {
+	@apply mx-2 overflow-hidden;
+}
+
+input {
+	@apply border-slate-200 border rounded;
+}
+
+button {
+	@apply px-3 py-1 text-white text-base bg-red-500 rounded-md border-none hover:bg-red-400 items-center flex;
+}
+button[type='submit'] {
+	@apply px-3 py-1 text-white text-base bg-red-500 rounded-md border-none hover:bg-red-400 items-center flex;
+}
+label {
+	@apply flex justify-end;
+}
