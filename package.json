@@ -2,7 +2,7 @@
 	"name": "gunchat",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --host",
 		"build": "vite build",
 		"package": "svelte-kit package",
 		"preview": "vite preview",
@@ -40,6 +40,7 @@
 		"@sveltejs/adapter-node": "^1.0.0-next.85",
 		"@sveltejs/adapter-static": "^1.0.0-next.35",
 		"@sveltejs/svelte-virtual-list": "^3.0.1",
-		"gun": "^0.2020.1237"
+		"gun": "^0.2020.1237",
+		"svelte-migrate": "^1.0.0-next.7"
 	}
 }

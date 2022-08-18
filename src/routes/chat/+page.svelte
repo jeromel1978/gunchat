@@ -1,4 +1,6 @@
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import GUN from 'gun/gun.js';
 	import SEA from 'gun/sea.js';
 	import { gun, user, SendMessage, messages, key, match } from '$lib/gun';
